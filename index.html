@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Checkbox with Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Persistent Checkbox with Reset Button</h1>
+    <div class="checkbox-group">
+        <label><input type="checkbox" id="checkbox1"> Option 1</label><br>
+        <label><input type="checkbox" id="checkbox2"> Option 2</label><br>
+        <label><input type="checkbox" id="checkbox3"> Option 3</label><br>
+        <label><input type="checkbox" id="checkbox4"> Option 4</label>
+    </div>
+    <button onclick="resetCheckboxes()">Reset</button>
+
+    <script>
+        // Function to save the state of checkboxes to localStorage
+        function saveCheckboxState() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach((checkbox, index) => {
+                localStorage.setItem(`checkbox${index + 1}`, checkbox.checked);
+            });
+        }
+
+        // Function to load the state of checkboxes from localStorage
+        function loadCheckboxState() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach((checkbox, index) => {
+                const savedState = localStorage.getItem(`checkbox${index + 1}`);
+                checkbox.checked = savedState === 'true'; // Restore the saved state
+            });
+        }
+
+        // Function to reset all checkboxes
+        function resetCheckboxes() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach((checkbox, index) => {
+                checkbox.checked = false; // Uncheck all
+                localStorage.setItem(`checkbox${index + 1}`, false); // Update storage
+            });
+        }
+
+        // Event listener to save state whenever a checkbox is toggled
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', saveCheckboxState);
+        });
+
+        // Load checkbox state when the page is loaded
+        window.onload = loadCheckboxState;
+    </script>
+</body>
+</html>

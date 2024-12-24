@@ -3,66 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Persistent Checkbox with Reset</title>
+    <title>공구함LIST</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            text-align: center;
+            margin-top: 50px;
         }
-        .checkbox-group {
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 15px;
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #314f81;
+            padding: 10px 20px;
+            border-radius: 5px;
             font-size: 16px;
+        }
+        a:hover {
+            background-color: #2c3e5d;
+        }
+        .box {
+            width: 150px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border: 2px solid #007BFF;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
             cursor: pointer;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap; /* 줄바꿈 허용 */
+            justify-content: center; /* 가운데 정렬 */
+            gap: 15px; /* 박스 사이 간격 */
         }
     </style>
 </head>
-<body>
-    <h1>Persistent Checkbox with Reset Button</h1>
-    <div class="checkbox-group">
-        <label><input type="checkbox" id="checkbox1"> Option 1</label><br>
-        <label><input type="checkbox" id="checkbox2"> Option 2</label><br>
-        <label><input type="checkbox" id="checkbox3"> Option 3</label><br>
-        <label><input type="checkbox" id="checkbox4"> Option 4</label>
+<body bgcolor="#CBD0D8">
+    <h1>공구함 LIST</h1>
+    <div class="container">
+        <div>
+            <p><b>공구함 1</b></p>
+            <a href="label1.html">Go</a>
+        </div>
+        <div>
+            <p><b>공구함 2</b></p>
+            <a href="label2.html">Go</a>
+        </div>
+        <div>
+            <p><b>공구함 3</b></p>
+            <a href="label3.html">Go</a>
+        </div>
+        <div>
+            <p><b>공구함 4</b></p>
+            <a href="label4.html">Go</a>
+        </div>
+        <div>
+            <p><b>공구함 5</b></p>
+            <a href="label5.html">Go</a>
+        </div>
+        <div>
+            <p><b>공구함 6</b></p>
+            <a href="label6.html">Go</a>
+        </div>
     </div>
-    <button onclick="resetCheckboxes()">Reset</button>
-
-    <script>
-        // Function to save the state of checkboxes to localStorage
-        function saveCheckboxState() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach((checkbox, index) => {
-                localStorage.setItem(`checkbox${index + 1}`, checkbox.checked);
-            });
-        }
-
-        // Function to load the state of checkboxes from localStorage
-        function loadCheckboxState() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach((checkbox, index) => {
-                const savedState = localStorage.getItem(`checkbox${index + 1}`);
-                checkbox.checked = savedState === 'true'; // Restore the saved state
-            });
-        }
-
-        // Function to reset all checkboxes
-        function resetCheckboxes() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach((checkbox, index) => {
-                checkbox.checked = false; // Uncheck all
-                localStorage.setItem(`checkbox${index + 1}`, false); // Update storage
-            });
-        }
-
-        // Event listener to save state whenever a checkbox is toggled
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', saveCheckboxState);
-        });
-
-        // Load checkbox state when the page is loaded
-        window.onload = loadCheckboxState;
-    </script>
 </body>
 </html>

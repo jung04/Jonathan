@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공구함1</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>공구함1</h1>
+    <div class="checkbox-group">
+        <label><input type="checkbox" id="checkbox1"> Option 1</label><br>
+        <label><input type="checkbox" id="checkbox2"> Option 2</label><br>
+        <label><input type="checkbox" id="checkbox3"> Option 3</label><br>
+        <label><input type="checkbox" id="checkbox4"> Option 4</label>
+    </div>
+    <button onclick="resetCheckboxes()">Reset</button>
+
+    <script>
+        // 고유 페이지 식별자 설정
+        const pageIdentifier = 'page6'; // 페이지마다 이 값을 다르게 설정
+
+        // Function to save the state of checkboxes to localStorage
+        function saveCheckboxState() {
+            const checkboxes1 = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes1.forEach((checkbox1, index) => {
+                localStorage.setItem(`${pageIdentifier}_checkbox${index + 1}`, checkbox1.checked);
+            });
+        }
+
+        // Function to load the state of checkboxes from localStorage
+        function loadCheckboxState() {
+            const checkboxes1 = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes1.forEach((checkbox1, index) => {
+                const savedState = localStorage.getItem(`${pageIdentifier}_checkbox${index + 1}`);
+                checkbox1.checked = savedState === 'true'; // Restore the saved state
+            });
+        }
+
+        // Function to reset all checkboxes
+        function resetCheckboxes() {
+            const checkboxes1 = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes1.forEach((checkbox1, index) => {
+                checkbox1.checked = false; // Uncheck all
+                localStorage.setItem(`${pageIdentifier}_checkbox${index + 1}`, false); // Update storage
+            });
+        }
+
+        // Event listener to save state whenever a checkbox is toggled
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox1 => {
+            checkbox1.addEventListener('change', saveCheckboxState);
+        });
+
+        // Load checkbox state when the page is loaded
+        window.onload = loadCheckboxState;
+    </script>
+</body>
+</html>
